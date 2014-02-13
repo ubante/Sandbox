@@ -1,7 +1,7 @@
 package com.ubante.nodegap;
 
 /**
- * Created by Con_0 on 2/13/14.
+ * This is the start of a game.
  */
 public class NodeMap {
     static void display(Node a) {
