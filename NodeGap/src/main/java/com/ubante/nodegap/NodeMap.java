@@ -8,6 +8,8 @@ public class NodeMap {
         a.print();
         a.printChildren();
         a.printAncestors();
+        a.generateChildren(3);
+        a.printAncestors();
     }
 
     public static void main(String[] args) {
