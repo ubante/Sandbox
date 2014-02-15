@@ -4,12 +4,10 @@ package com.ubante.nodegap;
  * This is the start of a game.
  */
 public class NodeMap {
-    static void display(Node a) {
-        a.print();
-        a.printChildren();
-        a.printAncestors();
-        a.generateChildren(3);
-        a.printAncestors();
+    static void display(Node n) {
+        n.print();
+        n.printChildren();
+        n.printAncestors();
     }
 
     public static void main(String[] args) {
@@ -23,6 +21,7 @@ public class NodeMap {
         aba.setParent(ab);
 
         aa.generateChildren(5);
+        aba.generateAncestors(13);
 
         display(a);
     }

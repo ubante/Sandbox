@@ -10,6 +10,7 @@ import java.util.Random;
 public class Node {
     static int MAXCHILDREN = 10;
     static int MINCHILDREN = 3;
+    static int depth = 0;
     String name;
     Node parent;
     List<Node> children = new ArrayList<Node>();
@@ -28,7 +29,7 @@ public class Node {
     }
 
     void print() {
-        System.out.printf("This node is for %s\n", name);
+        System.out.printf("This node's name is %s.\n", name);
     }
 
     void printChildren() {
@@ -70,16 +71,24 @@ public class Node {
         }
     }
 
-    void generateAncestors(int count) {
+    void generateAncestors2(int count) {
         if (count < MINCHILDREN) {
             generateChildren(count);
         } else if (count > MAXCHILDREN) {
             // we're going to need grandchildren so first generate children
             Random r = new Random();
             int childrenCount = MINCHILDREN + r.nextInt(MAXCHILDREN-MINCHILDREN+1);
-            generateChildren(childrenCount);
-
+            depth++;
             // a better way is to use a latent dirichlet allocation, but....
+            int [] childrenSizes = Distribution.makeDistribution(MINCHILDREN,
+                    childrenCount,count);
+            System.out.printf("depth = %d, children count is %d, trying to sum to %d\n",
+                    depth,childrenCount,count);
+            Distribution.printDistribution(childrenSizes);
+
+            for (int childrenSize : childrenSizes) {
+                generateAncestors(childrenSize);
+            }
 
         } else {
             // we should really consider the possibility of grandchildren even in this case, but....
@@ -88,4 +97,32 @@ public class Node {
 
     }
 
+    /**
+     * This recursion is lacking XXX.
+     * 
+     * @param count
+     */
+    void generateAncestors(int count) {
+        if (count < MINCHILDREN) {
+            generateChildren(count);
+        } else if (count > MAXCHILDREN) {
+            Random r = new Random();
+            int childrenCount = MINCHILDREN + r.nextInt(MAXCHILDREN-MINCHILDREN);
+
+            // a better way is to use a latent dirichlet allocation, but....
+            int [] childrenSizes = SimpleDistribution.makeDistribution(childrenCount,count);
+            System.out.printf("depth = %d, children count is %d, trying to sum to %d\n",
+                    depth,childrenCount,count);
+            Distribution.printDistribution(childrenSizes);
+
+            for (int childrenSize : childrenSizes) {
+                generateAncestors(childrenSize);
+            }
+
+        } else {
+            // we should really consider the possibility of grandchildren even in this case, but....
+            generateChildren(count);
+        }
+
+    }
 }
