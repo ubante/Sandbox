@@ -7,23 +7,23 @@ public class NodeMap {
     static void display(Node n) {
         n.print();
         n.printChildren();
-        n.printAncestors();
+        n.printDescendents();
     }
 
     public static void main(String[] args) {
-        Node a = new Node("a");
-        Node aa = new Node("aa");
-        Node ab = new Node("ab");
-        Node aba = new Node("aba");
-
-        aa.setParent(a);
-        ab.setParent(a);
-        aba.setParent(ab);
-
-        aa.generateChildren(5);
-        aba.generateAncestors(13);
-
-        display(a);
+        Node a = new Node("A");
+//        Node aa = new Node("aa");
+//        Node ab = new Node("ab");
+//        Node aba = new Node("aba");
+//
+//        aa.setParent(a);
+//        ab.setParent(a);
+//        aba.setParent(ab);
+//
+//        aa.generateChildren(5);
+        a.generateDescendents(400);
+        a.printGrandChildren();
+//        display(a);
     }
 
 }

@@ -6,9 +6,9 @@ import java.util.Random;
  * This is when you want N random positive integers to sum to S.
  */
 public class SimpleDistribution {
-    static int[] makeDistribution(int count, int total) {
-//        int[] list = new int[count];
-//        int listTotal = 0;
+
+
+    static int[] _makeDistribution(int count, int total) {
         float listTotal = 0;
         float normalizeRatio;
         float[] flist0 = new float[count];
@@ -17,7 +17,7 @@ public class SimpleDistribution {
         int largestElementIndex = 0;
         float largestElement = 0;
 
-        // Make a list of random numbers that fit the range
+        // Make a list of random numbers
         Random r = new Random();
         for (int i = 0; i < count; i++) {
             float number = r.nextFloat();
@@ -27,19 +27,19 @@ public class SimpleDistribution {
 
         // Normalize them to the total
         normalizeRatio = total / listTotal;
-        System.out.printf("total is %d, listtotal is %4f\n",total,listTotal);
-        System.out.printf("ratio is %4f\n\n",normalizeRatio);
+//        System.out.printf("total is %d, listtotal is %4f\n",total,listTotal);
+//        System.out.printf("ratio is %4f\n\n",normalizeRatio);
         for (int i = 0; i < count; i++) {
             flist[i] = flist0[i] * normalizeRatio;
-            System.out.printf("%4f becomes %4f\n",flist0[i],flist[i]);
+//            System.out.printf("%4f becomes %4f\n",flist0[i],flist[i]);
         }
 
         // Account for rounding errors
         listTotal = 0;
-        System.out.println("");
+//        System.out.println("");
         for (int i = 0; i < count; i++) {
             list[i] = Math.round(flist[i]);
-            System.out.printf("%4f becomes %d\n",flist[i],list[i]);
+//            System.out.printf("%4f becomes %d\n",flist[i],list[i]);
             listTotal = listTotal + list[i];
 
             // Find the largest element in case we need to skew the total later
@@ -49,8 +49,8 @@ public class SimpleDistribution {
             }
         }
         float difference = listTotal-total;
-        System.out.printf("New total is %4f\n",listTotal);
-        System.out.printf("We want a total of %d so the difference is %4f\n",total,difference);
+//        System.out.printf("New total is %4f\n",listTotal);
+//        System.out.printf("We want a total of %d; the difference is %4f\n",total,difference);
 
 /* If the total of the numbers generated is > than the desired total, then we will shrink the largest
 element.  The same element will be made greater if the total generated is < than the total desired.
@@ -58,6 +58,23 @@ element.  The same element will be made greater if the total generated is < than
         list[largestElementIndex] -= difference;
 
         // Return the list
+        return list;
+    }
+
+    static int[] makeDistribution(int count, int total) {
+        int[] list = new int[count];
+        int product = 0;
+
+        while (product == 0) {
+            list = _makeDistribution(count, total);
+
+        // Make sure that there are no zeros.  We need positive integers.
+            product = 1;
+            for (int value : list) {
+                product *= value;
+            }
+        }
+
         return list;
     }
 
@@ -70,8 +87,8 @@ element.  The same element will be made greater if the total generated is < than
     }
 
     public static void main(String[] args) {
-//        int [] d = makeDistribution(3,400);
-        int [] d = makeDistribution(10,13);
+        int [] d = makeDistribution(3,400);
+//        int [] d = makeDistribution(4,13);
 
         printDistribution (d);
     }
