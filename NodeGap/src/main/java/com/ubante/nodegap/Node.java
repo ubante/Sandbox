@@ -10,7 +10,6 @@ import java.util.Random;
 public class Node {
     static int MAXCHILDREN = 9;
     static int MINCHILDREN = 3;
-    static int depth = 0;
     String name;
     Node parent;
     List<Node> children = new ArrayList<Node>();
@@ -54,24 +53,29 @@ public class Node {
         }
     }
 
-    List<Node> getDescendents() {
-        List<Node> descendents = new ArrayList<Node>();
+    List<Node> getDescendants() {
+        List<Node> descendants = new ArrayList<Node>();
         for (Node c : children) {
-            descendents.add(c);
+            descendants.add(c);
             // check for grandchildren aka walk the tree
-            List<Node> grandchildren = c.getDescendents();
+            List<Node> grandchildren = c.getDescendants();
             if (! grandchildren.isEmpty()) {
-                // add the grandchildren to descendents
-                descendents.addAll(grandchildren);
+                // add the grandchildren to descendants
+                descendants.addAll(grandchildren);
             }
         }
-        return descendents;
+        return descendants;
+    }
+
+    int getDescendantCount() {
+        List<Node> d = getDescendants();
+        return d.size();
     }
 
     void printDescendents() {
-        List<Node> descendents = getDescendents();
-        System.out.printf("%s has these %d descendents: ",name,descendents.size());
-        for (Node a : descendents) {
+        List<Node> descendants = getDescendants();
+        System.out.printf("%s has these %d descendants: ", name, descendants.size());
+        for (Node a : descendants) {
             System.out.printf("%s ",a.name);
         }
         System.out.println();
@@ -100,32 +104,6 @@ public class Node {
         }
     }
 
-    void generateAncestors2(int count) {
-        if (count < MINCHILDREN) {
-            generateChildren(count);
-        } else if (count > MAXCHILDREN) {
-            // we're going to need grandchildren so first generate children
-            Random r = new Random();
-            int childrenCount = MINCHILDREN + r.nextInt(MAXCHILDREN-MINCHILDREN+1);
-            depth++;
-            // a better way is to use a latent dirichlet allocation, but....
-            int [] childrenSizes = Distribution.makeDistribution(MINCHILDREN,
-                    childrenCount,count);
-            System.out.printf("depth = %d, children count is %d, trying to sum to %d\n",
-                    depth,childrenCount,count);
-            Distribution.printDistribution(childrenSizes);
-
-            for (int childrenSize : childrenSizes) {
-                generateDescendents(childrenSize);
-            }
-
-        } else {
-            // we should really consider the possibility of grandchildren even in this case, but....
-            generateChildren(count);
-        }
-
-    }
-
     /**
      * This recursion is lacking XXX.
      *
@@ -133,17 +111,17 @@ public class Node {
      */
     void generateDescendents(int count) {
         if (count < MINCHILDREN) {
-            System.out.printf("generating %d children for %s\n",count,name);
+//            System.out.printf("generating %d children for %s\n",count,name); //debug
             generateChildren(count);
         } else if (count > MAXCHILDREN) {
-            System.out.printf("generating %d grandchildren* for %s\n", count, name);
+//            System.out.printf("generating %d descendents for %s\n", count, name); //debug
             Random r = new Random();
             int childrenCount = MINCHILDREN + r.nextInt(MAXCHILDREN-MINCHILDREN);
 
             // a better way is to use a latent dirichlet allocation, but....
             int [] childrenSizes = SimpleDistribution.makeDistribution(childrenCount,count);
-            System.out.printf("depth = %d, children count is %d, trying to sum to %d\n",
-                    depth,childrenCount,count);
+//            System.out.printf("depth = %d, children count is %d, trying to sum to %d\n",
+//                    depth,childrenCount,count);
             Distribution.printDistribution(childrenSizes);
 
             for (int i=0; i<childrenSizes.length; i++) {
@@ -159,7 +137,7 @@ public class Node {
 
         } else {
             // we should really consider the possibility of grandchildren even in this case, but....
-            System.out.printf("generating* %d children for %s\n",count,name);
+//            System.out.printf("generating* %d children for %s\n",count,name); //debug
             generateChildren(count);
         }
 

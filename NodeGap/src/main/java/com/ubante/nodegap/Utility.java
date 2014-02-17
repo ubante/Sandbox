@@ -17,5 +17,21 @@ public class Utility {
         System.out.println("number is " + number);
         number++;
         System.out.println("number is " + number);
+
+        Rock stone = new Granite();
+        System.out.println("This is a rock: " + stone.name);
+    }
+}
+
+class Rock {
+    String name;
+    float size;
+}
+
+class Granite extends Rock {
+    String name = "granite";
+
+    Granite() {
+        this.name = name;
     }
 }
