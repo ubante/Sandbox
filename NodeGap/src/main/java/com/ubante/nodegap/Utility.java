@@ -5,33 +5,30 @@ package com.ubante.nodegap;
  */
 public class Utility {
     public static void main(String[] args) {
-        Node a = new Node("Ancestor");
-        a.generateChild("1");
+        Node x = new Node("X");
+        x.generateChildren(3);
+        Node w = new Node("W");
+        w.generateChildren(5);
+        w.setParent(x);
+        Node y = new Node("Y");
+        y.generateChildren(4);
+        Node z = new Node("Z");
+        x.setParent(z);
+        y.setParent(z);
+        Node T = new Node("T");
+        T.setParent(z);
 
-        a.printChildren();
+        z.printChildren();
+        System.out.println();
 
-        int number = 1;
+        z.printGrandChildren();
+        System.out.println();
 
-        System.out.println("number is " + number);
-        number = number + 1;
-        System.out.println("number is " + number);
-        number++;
-        System.out.println("number is " + number);
+        NodePrinter.HorizontalTreeNoLeaves(z);
+        NodePrinter.VerticalTree(z);
 
-        Rock stone = new Granite();
-        System.out.println("This is a rock: " + stone.name);
+//        float fff = 3-2;
+//        System.out.println(fff);
     }
-}
 
-class Rock {
-    String name;
-    float size;
-}
-
-class Granite extends Rock {
-    String name = "granite";
-
-    Granite() {
-        this.name = name;
-    }
 }

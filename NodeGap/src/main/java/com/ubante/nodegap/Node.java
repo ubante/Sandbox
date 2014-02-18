@@ -13,6 +13,7 @@ public class Node {
     String name;
     Node parent;
     List<Node> children = new ArrayList<Node>();
+    int printWidth; // units in Nodes
 
     Node(String name) {
         this.name = name;
@@ -122,7 +123,7 @@ public class Node {
             int [] childrenSizes = SimpleDistribution.makeDistribution(childrenCount,count);
 //            System.out.printf("depth = %d, children count is %d, trying to sum to %d\n",
 //                    depth,childrenCount,count);
-            Distribution.printDistribution(childrenSizes);
+//            Distribution.printDistribution(childrenSizes);
 
             for (int i=0; i<childrenSizes.length; i++) {
                 Node child = new Node(name+Integer.toString(i+1));

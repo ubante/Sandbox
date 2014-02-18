@@ -21,11 +21,13 @@ public class NodeMap {
 //        aba.setParent(ab);
 //
 //        aa.generateChildren(5);
-        a.generateDescendents(500);
+        a.generateDescendents(30);
         a.printGrandChildren();
         a.printDescendents();
 
-        NodePrinter.HorizontalTree(a);
+//        NodePrinter.HorizontalTreeNoLeaves(a);
+//        NodePrinter.HorizontalTreeConcise(a);
+        NodePrinter.VerticalTree(a);
 //        display(a);
     }
 
