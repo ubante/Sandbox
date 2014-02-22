@@ -29,6 +29,10 @@ public class NodeMap {
 //        NodePrinter.HorizontalTreeConcise(a);
         NodePrinter.VerticalTree(a);
 //        display(a);
+
+        System.out.println("\nPrinting the DOT");
+        NodeDotPrinter ndp = new NodeDotPrinter(a);
+        ndp.print();
     }
 
 }

@@ -68,6 +68,19 @@ public class Node {
         return descendants;
     }
 
+    List<ParentChildPair> getParentChildPairs() {
+        List<ParentChildPair> pcp = new ArrayList<ParentChildPair>();
+        for (Node child : children) {
+            pcp.add(new ParentChildPair(this,child));
+
+            List<ParentChildPair> pairs = child.getParentChildPairs();
+            if (! pairs.isEmpty()) {
+                pcp.addAll(pairs);
+            }
+        }
+        return pcp;
+    }
+
     int getDescendantCount() {
         List<Node> d = getDescendants();
         return d.size();
