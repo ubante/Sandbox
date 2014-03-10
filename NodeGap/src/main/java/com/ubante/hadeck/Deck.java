@@ -41,6 +41,12 @@ public class Deck {
         return cards;
     }
 
+    void setDeckNotes(String notes) {
+        for (Card c : cards) {
+            c.setDeckNotes(notes);
+        }
+    }
+
     /**
      * For testing the class.
      * @param args

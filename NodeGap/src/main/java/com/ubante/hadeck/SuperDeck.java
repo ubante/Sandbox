@@ -14,6 +14,8 @@ public class SuperDeck {
     SuperDeck(int deckCount) {
         for (int ctr = 0; ctr<deckCount; ctr++) {
             Deck newDeck = new Deck();
+            String deckNote = Integer.toString(ctr+100);
+            newDeck.setDeckNotes(deckNote);
             listOfCards.addAll(Arrays.asList(newDeck.getCards()));
         }
     }
@@ -22,7 +24,7 @@ public class SuperDeck {
         int counter = 0;
 
         for (Card c : listOfCards) {
-            System.out.printf("%3s ",c.face);
+            c.printCompactVerbose();
             counter++;
             if ( counter % width == 0) {
                 System.out.println();

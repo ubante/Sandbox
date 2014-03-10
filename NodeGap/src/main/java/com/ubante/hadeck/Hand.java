@@ -10,7 +10,12 @@ import java.util.List;
 public class Hand {
     List<Card> cards = new ArrayList<Card>();
     int handSizeLimit;
+    List<Partition> partitionList = new ArrayList<Partition>();
 
+    /**
+     * Constructors.
+     * @param size
+     */
     Hand(int size) {
         this.handSizeLimit = size;
     }
@@ -23,6 +28,11 @@ public class Hand {
         cards.add(c);
     }
 
+    /**
+     * Add a card to a hand.  Throw an exception if the hand is too large.
+     * @param c
+     * @throws HandTooLargeException
+     */
     void addCard(Card c) throws HandTooLargeException {
         int size = size();
         if (size >= handSizeLimit) {
@@ -38,13 +48,51 @@ public class Hand {
 
     void print() {
         for (Card c : cards) {
-            System.out.printf("%3s ",c.face);
+            c.printCompactVerbose();
         }
         System.out.println();
     }
 
     void order() {
-//        Collections.sort(cards);
+        Collections.sort(cards);
+    }
+
+    void fillPartitions() {
+//        List<Partition> partitionList = new ArrayList<Partition>();
+        for (Card c : cards) {
+            String note = c.deckNotes;
+            Partition partition = null;
+
+//            System.out.println("this card:");
+//            c.printCompactVerbose();
+//            System.out.println();
+            // Look for an existing partition for this card.
+            for (Partition p : partitionList) {
+                if (p.name == note) {
+                    partition = p;
+//                    System.out.println("found the partition");
+                    break;
+                }
+            }
+
+            // Create a new partition if a matching one does not yet exist.
+            if (partition == null) {
+//                System.out.println("Creating a new partition.");
+                partition = new Partition(note);
+                partitionList.add(partition);
+            }
+
+            // Add this card.
+            partition.add(c);
+//            partition.print();
+        }
+    }
+
+    void printParitions() {
+        System.out.println("These are the partitions for the hand.  ");
+        for (Partition p : partitionList) {
+            p.print();
+        }
     }
 
     /**
@@ -54,23 +102,35 @@ public class Hand {
     public static void main(String[] args) {
         Hand h = new Hand();
         try {
-            h.addCard(new Card("one"));
-            h.addCard(new Card("two"));
+            Card c5 = new Card("5");
+            c5.setDeckNotes("aaa");
+            h.addCard(c5);
+            Card c15 = new Card("15");
+            c15.setDeckNotes("bbb");
+            h.addCard(c15);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        h.print();
 
-        for (int i=3; i<10; i++) {
+        for (int i=13; i>5; i--) {
             try {
-                h.addCard(new Card(Integer.toString(i)));
-                h.print();
+                Card aCard = new Card(Integer.toString(i));
+                aCard.setDeckNotes("ccc");
+                h.addCard(aCard);
+//                h.addCard(new Card(Integer.toString(i)));
+//                h.print();
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 break;
             }
         }
         h.print();
+        h.order();
+        h.print();
+        System.out.println();
 
+        h.fillPartitions();
+        System.out.println("\n\nThe final partition list:");
+        h.printParitions();
     }
 }

@@ -7,7 +7,8 @@ import java.util.List;
  * Created by Con_0 on 3/8/14.
  */
 public class DeskShuffleSimulation {
-    static SuperDeck s = new SuperDeck(3);
+    static int numberOfDecks = 3;
+    static SuperDeck s = new SuperDeck(numberOfDecks);
     static List<Hand> hands = new ArrayList<Hand>();
 
     static void printHands() {
@@ -42,13 +43,21 @@ public class DeskShuffleSimulation {
                 hands.add(currentHand);
             }
         }
-
-        printHands();
-
+//        printHands();
 
         // Order the hands
         for (Hand h : hands) {
             h.order();
         }
+        printHands();
+
+        // Fill the partitions
+        // Later, put this in a thread for each hand.
+        for (Hand h : hands) {
+            h.fillPartitions();
+            h.printParitions();
+        }
+
+
     }
 }
