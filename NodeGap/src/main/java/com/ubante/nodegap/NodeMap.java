@@ -21,7 +21,7 @@ public class NodeMap {
 //        aba.setParent(ab);
 //
 //        aa.generateChildren(5);
-        a.generateDescendents(30);
+        a.generateDescendents(100);
         a.printGrandChildren();
         a.printDescendents();
 
