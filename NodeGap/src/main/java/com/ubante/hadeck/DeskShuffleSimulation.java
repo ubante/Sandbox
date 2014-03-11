@@ -58,6 +58,8 @@ public class DeskShuffleSimulation {
             h.printParitions();
         }
 
+        // Merge the partitions
+        
 
     }
 }
