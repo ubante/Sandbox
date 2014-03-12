@@ -59,7 +59,7 @@ public class DeskShuffleSimulation {
         }
 
         // Merge the partitions
-        
+
 
     }
 }

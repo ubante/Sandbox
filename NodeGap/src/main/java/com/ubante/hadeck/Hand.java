@@ -58,26 +58,19 @@ public class Hand {
     }
 
     void fillPartitions() {
-//        List<Partition> partitionList = new ArrayList<Partition>();
         for (Card c : cards) {
             String note = c.deckNotes;
             Partition partition = null;
 
-//            System.out.println("this card:");
-//            c.printCompactVerbose();
-//            System.out.println();
-            // Look for an existing partition for this card.
             for (Partition p : partitionList) {
                 if (p.name == note) {
                     partition = p;
-//                    System.out.println("found the partition");
                     break;
                 }
             }
 
             // Create a new partition if a matching one does not yet exist.
             if (partition == null) {
-//                System.out.println("Creating a new partition.");
                 partition = new Partition(note);
                 partitionList.add(partition);
             }
@@ -86,6 +79,10 @@ public class Hand {
             partition.add(c);
 //            partition.print();
         }
+
+        // Add the partitions to the master list of partitions for the merge
+        // step.
+        System.out.println("Need to add this hand's partitions to the master list.");
     }
 
     void printParitions() {
