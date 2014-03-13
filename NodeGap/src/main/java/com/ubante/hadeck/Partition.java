@@ -1,13 +1,13 @@
 package com.ubante.hadeck;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Con_0 on 3/10/14.
  */
 public class Partition {
-    static List<Partition> totalPartitionList = new ArrayList<Partition>();
     String name;
     List<Card> cardList = new ArrayList<Card>();
 
@@ -26,8 +26,8 @@ public class Partition {
         }
         System.out.println();
     }
-      
-    static void addPartition(Partition p) {
-        totalPartitionList.add(p);
+
+    void order() {
+        Collections.sort(cardList);
     }
 }

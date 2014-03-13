@@ -57,7 +57,8 @@ public class Hand {
         Collections.sort(cards);
     }
 
-    void fillPartitions() {
+    void fillPartitions(PartitionList masterList) {
+
         for (Card c : cards) {
             String note = c.deckNotes;
             Partition partition = null;
@@ -77,12 +78,11 @@ public class Hand {
 
             // Add this card.
             partition.add(c);
-//            partition.print();
         }
 
         // Add the partitions to the master list of partitions for the merge
         // step.
-        System.out.println("Need to add this hand's partitions to the master list.");
+        masterList.addPartition(partitionList);
     }
 
     void printParitions() {
@@ -126,7 +126,7 @@ public class Hand {
         h.print();
         System.out.println();
 
-        h.fillPartitions();
+//        h.fillPartitions();
         System.out.println("\n\nThe final partition list:");
         h.printParitions();
     }

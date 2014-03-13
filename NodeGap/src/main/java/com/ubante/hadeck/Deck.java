@@ -34,7 +34,6 @@ public class Deck {
 
     void shuffle() {
         Collections.shuffle(Arrays.asList(cards));
-//        Card[] shuffledDeck = new Card[52];
     }
 
     Card[] getCards() {

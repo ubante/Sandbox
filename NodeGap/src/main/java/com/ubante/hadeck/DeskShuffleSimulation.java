@@ -23,6 +23,7 @@ public class DeskShuffleSimulation {
      * @param args
      */
     public static void main(String[] args) {
+        PartitionList pList = new PartitionList();
 
         s.printMatrix();
         System.out.println("Now we shuffle:");
@@ -43,7 +44,6 @@ public class DeskShuffleSimulation {
                 hands.add(currentHand);
             }
         }
-//        printHands();
 
         // Order the hands
         for (Hand h : hands) {
@@ -54,12 +54,21 @@ public class DeskShuffleSimulation {
         // Fill the partitions
         // Later, put this in a thread for each hand.
         for (Hand h : hands) {
-            h.fillPartitions();
+            h.fillPartitions(pList);
             h.printParitions();
         }
 
         // Merge the partitions
+        System.out.println("This is the pre-merge partition list:");
+        pList.printShort();
+        PartitionList mergedList = pList.merge();
+        System.out.println("This is after merging:");
+        mergedList.printShort();
 
+        // Sort each of the partitions in the merged list
+        mergedList.orderPartitions();
+        System.out.println("This is after sorting:");
+        mergedList.printShort();
 
     }
 }
