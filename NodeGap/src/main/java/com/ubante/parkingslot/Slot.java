@@ -33,7 +33,8 @@ public class Slot {
         String message;
 
         if (isOccupied) {
-            message = String.format("Slot is named %s and is occupied by %s",name,occupier.name);
+            message = String.format("Slot is named %s and is occupied by %s",
+                    name,occupier.name);
         } else {
             message = String.format("Slot is named %s and is not occupied",name);
         }
@@ -41,9 +42,16 @@ public class Slot {
         System.out.println(message);
     }
 
+    String getDescription() {
+        if (isOccupied) {
+            return String.format("%s(%s)  ", name, occupier.name);
+        } else {
+            return String.format("%s(empty)  ", name);
+        }
+    }
+
     void printShort() {
-        System.out.printf("%s, ",name);
-//        System.out.printf("%s(%s),",name,occupier.name);
+        System.out.printf(getDescription());
     }
 
     public static void main(String[] args) {

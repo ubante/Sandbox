@@ -33,6 +33,24 @@ public class ParkingLot {
         System.out.println();
     }
 
+    void printMatrix() {
+        int index=0;
+        int rowCount = 3;
+        int columnCount = size()/rowCount + 1;
+
+        for (int row=0; row<rowCount; row++) {
+            for (int column=0; column<columnCount; column++) {
+                System.out.printf("%-20s",slotList[index].getDescription());
+                index++;
+
+                if (index>=size()) {
+                    break;
+                }
+            }
+            System.out.println();
+        }
+    }
+
     void park(Car c) {
         for (int i=0; i<size(); i++) {
             if (! slotList[i].isOccupied) {
