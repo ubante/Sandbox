@@ -37,13 +37,17 @@ public class Simulator {
             }
 
             // Find the movies that ended this hour.
-            for (Movie m : schedule.getMoviesThatEndAt(hour)) {
-                System.out.println("----- Ending "+m.name);
-                pl.unpark(m.viewers);
+//            for (Movie m : schedule.getMoviesThatEndAt(hour)) {
+//                System.out.println("----- Ending "+m.name);
+//                pl.unpark(m.viewers);
+//                pl.printStatus();
+//            }
+
+            for (Show s : schedule.getShowsThatEndAt(hour)) {
+                System.out.println("----- Ending "+s.movie.name);
+                pl.unpark(s);
                 pl.printStatus();
             }
-
-
         }
     }
 }

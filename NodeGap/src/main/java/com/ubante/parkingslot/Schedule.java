@@ -67,6 +67,18 @@ public class Schedule {
         return shows;
     }
 
+    List<Show> getShowsThatEndAt(int hour) {
+        List<Show> shows = new ArrayList<Show>();
+
+        for (Show s : schedule) {
+            if (s.endTime == hour) {
+                shows.add(s);
+            }
+        }
+
+        return shows;
+    }
+
     List<Movie> getMoviesThatStartAt(int hour) {
         List<Movie> movies = new ArrayList<Movie>();
 

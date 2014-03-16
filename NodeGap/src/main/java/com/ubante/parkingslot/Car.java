@@ -36,6 +36,8 @@ public class Car {
         }
     }
 
+    Show getShow() { return show; }
+
     public static void main(String[] args) {
         Car aCar = new Car();
         aCar.print();

@@ -91,10 +91,19 @@ public class ParkingLot {
         System.out.println("FATAL: We are trying to unpark an empty parking lot.");
     }
 
-    /**
-     * This will remove the car in given slotIndex.
-     * @param slotIndex
-     */
+    void unpark(Show show) {
+        for (Slot s : slotList) {
+            if (s.isOccupied) {
+                Car car = s.occupier;
+                if (car.getShow() == show) {
+                    s.empty();
+                    occupiedSlotCount--;
+                }
+            }
+        }
+    }
+
+
 //    void unpark(int slotIndex) {
 //        slotList[slotIndex].empty();
 //        occupiedSlotCount--;
