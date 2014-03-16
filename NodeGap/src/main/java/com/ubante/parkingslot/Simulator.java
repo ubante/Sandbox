@@ -14,10 +14,36 @@ public class Simulator {
      * @param args
      */
     public static void main(String[] args) {
-        ParkingLot parkingLot = new ParkingLot(40);
+        ParkingLot pl = new ParkingLot(380);
         Schedule schedule = new Schedule();
         schedule.makeDefault();
 
-        schedule.print();
+        schedule.printCapacity();
+
+        for (int hour = schedule.getStartTime(); hour<24; hour++ ) {
+            System.out.printf("The time is %d:00\n", hour);
+
+            // Find the movies that start during this hour.
+//            for (Movie m : schedule.getMoviesThatStartAt(hour)) {
+//                System.out.println("+++++ Starting "+m.name);
+//                pl.park(m.viewers);
+//                pl.printStatus();
+//            }
+
+            for (Show s : schedule.getShowsThatStartAt(hour)) {
+                System.out.println("+++++ Starting "+s.movie.name);
+                pl.park(s);
+                pl.printStatus();
+            }
+
+            // Find the movies that ended this hour.
+            for (Movie m : schedule.getMoviesThatEndAt(hour)) {
+                System.out.println("----- Ending "+m.name);
+                pl.unpark(m.viewers);
+                pl.printStatus();
+            }
+
+
+        }
     }
 }

@@ -5,18 +5,24 @@ package com.ubante.parkingslot;
  */
 public class Show {
     int startTime;
+    int endTime;
     Movie movie;
 
     Show (Movie m, int startTime) {
         this.movie = m;
         this.startTime = startTime;
+        this.endTime = startTime+m.durationMinutes/60;
     }
 
     void print() {
-//        System.out.printf("%s will run from %d until %d\n",
-//                movie.name,startTime,startTime+movie.durationMinutes/60);
         System.out.printf("%d - %d: %s\n",startTime,
-                startTime+movie.durationMinutes/60,movie.name);
+                endTime,movie.name);
+    }
+
+    void printCapacity() {
+        System.out.printf("%d - %d: %s(%d)\n",startTime,
+                startTime+movie.durationMinutes/60,movie.name,
+                movie.viewers);
     }
 
     public static void main(String[] args) {

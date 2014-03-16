@@ -22,7 +22,7 @@ public class Schedule {
         addShow(new Show(m2, 14));
         addShow(new Show(m3, 15));
         addShow(new Show(m1, 16));
-        addShow(new Show(m2, 17));
+        addShow(new Show(m2, 16));
         addShow(new Show(m3, 18));
     }
 
@@ -32,10 +32,63 @@ public class Schedule {
         }
     }
 
+    void printCapacity() {
+        for (Show s : schedule) {
+            s.printCapacity();
+        }
+    }
+
+    int getStartTime() {
+        int firstShowStartTime = 24;
+
+        for (Show show : schedule) {
+            if (show.startTime<firstShowStartTime) {
+                firstShowStartTime = show.startTime;
+            }
+        }
+        return firstShowStartTime;
+    }
+
     void print2() {
         for (Show s : schedule) {
             System.out.printf("%s: %s\n",s.startTime,s.movie.name);
         }
+    }
+
+    List<Show> getShowsThatStartAt(int hour) {
+        List<Show> shows = new ArrayList<Show>();
+
+        for (Show s : schedule) {
+            if (s.startTime == hour) {
+                shows.add(s);
+            }
+        }
+
+        return shows;
+    }
+
+    List<Movie> getMoviesThatStartAt(int hour) {
+        List<Movie> movies = new ArrayList<Movie>();
+
+        for (Show s : schedule) {
+            if (s.startTime == hour) {
+                movies.add(s.movie);
+            }
+        }
+
+        return movies;
+    }
+
+    List<Movie> getMoviesThatEndAt(int hour) {
+        List<Movie> movies = new ArrayList<Movie>();
+
+        for (Show s : schedule) {
+            if (s.endTime == hour) {
+                movies.add(s.movie);
+            }
+        }
+
+        return movies;
     }
 
     public static void main(String[] args) {
@@ -47,10 +100,15 @@ public class Schedule {
         schedule.addShow(new Show(m2,14));
         schedule.addShow(new Show(m3,15));
         schedule.addShow(new Show(m1,16));
-        schedule.addShow(new Show(m2,17));
+        schedule.addShow(new Show(m2,16));
         schedule.addShow(new Show(m3,18));
 
         schedule.print();
+        System.out.println();
+        schedule.printCapacity();
+
+        System.out.println("The first movie begins at "+
+                schedule.getStartTime());
     }
 
 }

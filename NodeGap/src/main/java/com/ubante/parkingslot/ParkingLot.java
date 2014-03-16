@@ -62,23 +62,59 @@ public class ParkingLot {
         }
     }
 
-    void unpark(int slotIndex) {
-        slotList[slotIndex].empty();
-        occupiedSlotCount--;
+    void park(int numberOfCars) {
+        for (int i=1; i<=numberOfCars; i++) {
+            park(new Car());
+        }
     }
+
+    void park(Show show) {
+        for (int i=1; i<=show.movie.viewers; i++) {
+            park (new Car(show));
+        }
+    }
+
+    void unpark(int numberOfCars) {
+        int carsUnparked = 0;
+        for (Slot s : slotList) {
+            if (carsUnparked == numberOfCars) {
+                return;
+            }
+
+            if (s.isOccupied) {
+                s.empty();
+                carsUnparked++;
+                occupiedSlotCount--;
+            }
+        }
+
+        System.out.println("FATAL: We are trying to unpark an empty parking lot.");
+    }
+
+    /**
+     * This will remove the car in given slotIndex.
+     * @param slotIndex
+     */
+//    void unpark(int slotIndex) {
+//        slotList[slotIndex].empty();
+//        occupiedSlotCount--;
+//    }
+
+
 
     int getOccupiedSlotCount() { return occupiedSlotCount; }
 
     void printStatusMatrix() {
         int index=0;
-        double columnCount = 100.0;
+        double columnCount = 200.0;
         double doubleColumnCount = (double) columnCount;
         int rowCount = (int) Math.ceil((size()/doubleColumnCount));
 
         for (int row=0; row<rowCount; row++) {
             for (int column=0; column<columnCount; column++) {
                 if (slotList[index].isOccupied) {
-                    System.out.printf("X ");
+                    Car car = slotList[index].occupier;
+                    System.out.printf("%s ",car.getShowInitial());
                 } else {
                     System.out.printf(". ");
                 }
@@ -132,12 +168,29 @@ public class ParkingLot {
 //        System.out.println();
 //        parkingLot.printMatrix();
 
-        System.out.println("\nUnparking slot 13:");
-        parkingLot.unpark(13);
+//        System.out.println("\nUnparking slot 13:");
+//        parkingLot.unpark(13);
 //        parkingLot.printMatrix();
 
         System.out.println("\nThis is the status of the parking lot:");
         parkingLot.printStatus();
 
+        // Park 100 cars
+        parkingLot.park(100);
+        System.out.println("After parking more cars:");
+        parkingLot.printStatus();
+
+        // Unpark 50 cars
+        parkingLot.unpark(50);
+        System.out.println("After unparking 50 cars:");
+        parkingLot.printStatus();
+
     }
 }
+
+
+
+
+
+
+
