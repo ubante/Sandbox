@@ -5,6 +5,7 @@ package com.ubante.parkingslot;
  */
 public class ParkingLot {
     Slot[] slotList;
+    int occupiedSlotCount = 0;
 
     ParkingLot(int numberOfSlots) {
         slotList = new Slot[numberOfSlots];
@@ -55,9 +56,46 @@ public class ParkingLot {
         for (int i=0; i<size(); i++) {
             if (! slotList[i].isOccupied) {
                 slotList[i].fill(c);
+                occupiedSlotCount++;
                 return;
             }
         }
+    }
+
+    void unpark(int slotIndex) {
+        slotList[slotIndex].empty();
+        occupiedSlotCount--;
+    }
+
+    int getOccupiedSlotCount() { return occupiedSlotCount; }
+
+    void printStatusMatrix() {
+        int index=0;
+        double columnCount = 100.0;
+        double doubleColumnCount = (double) columnCount;
+        int rowCount = (int) Math.ceil((size()/doubleColumnCount));
+
+        for (int row=0; row<rowCount; row++) {
+            for (int column=0; column<columnCount; column++) {
+                if (slotList[index].isOccupied) {
+                    System.out.printf("X ");
+                } else {
+                    System.out.printf(". ");
+                }
+                index++;
+
+                if (index>=size()) {
+                    break;
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    void printStatus() {
+        System.out.printf("There are %d slots and %d are occupied.\n",size(),
+                getOccupiedSlotCount());
+        printStatusMatrix();
     }
 
     public static void main(String[] args) {
@@ -70,6 +108,36 @@ public class ParkingLot {
         Car car = new Car("Scubie");
         pl.park(car);
         pl.print();
+
+        ParkingLot parkingLot = new ParkingLot(400);
+        Car aCar = new Car();
+
+        parkingLot.park(aCar);
+        parkingLot.print();
+
+        for (int i=10; i<16; i++) {
+            parkingLot.park(new Car(Integer.toString(i)));
+        }
+
+        for (int i=20; i<36; i++) {
+            parkingLot.park(new Car(Integer.toString(i)));
+        }
+
+        System.out.println();
+        parkingLot.print();
+
+        System.out.println();
+        parkingLot.printShort();
+
+//        System.out.println();
+//        parkingLot.printMatrix();
+
+        System.out.println("\nUnparking slot 13:");
+        parkingLot.unpark(13);
+//        parkingLot.printMatrix();
+
+        System.out.println("\nThis is the status of the parking lot:");
+        parkingLot.printStatus();
 
     }
 }

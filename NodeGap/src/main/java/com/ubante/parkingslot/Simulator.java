@@ -15,26 +15,9 @@ public class Simulator {
      */
     public static void main(String[] args) {
         ParkingLot parkingLot = new ParkingLot(40);
-        Car aCar = new Car();
+        Schedule schedule = new Schedule();
+        schedule.makeDefault();
 
-        parkingLot.park(aCar);
-        parkingLot.print();
-
-        for (int i=10; i<16; i++) {
-            parkingLot.park(new Car(Integer.toString(i)));
-        }
-
-        for (int i=20; i<36; i++) {
-            parkingLot.park(new Car(Integer.toString(i)));
-        }
-
-        System.out.println();
-        parkingLot.print();
-
-        System.out.println();
-        parkingLot.printShort();
-
-        System.out.println();
-        parkingLot.printMatrix();
+        schedule.print();
     }
 }
