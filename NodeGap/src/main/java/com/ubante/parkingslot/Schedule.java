@@ -16,14 +16,19 @@ public class Schedule {
     void makeDefault() {
         Movie m1 = new Movie("Action", 120, 100);
         Movie m2 = new Movie("Cartoon", 60, 200);
-        Movie m3 = new Movie("Drama",180,50);
+        Movie m3 = new Movie("Drama", 180, 50);
+        Movie m4 = new Movie("JapaneseAnime",60, 70);
+        Movie m5 = new Movie("Boxing", 60, 25);
 
         addShow(new Show(m1, 13));
+        addShow(new Show(m4, 13));
         addShow(new Show(m2, 14));
         addShow(new Show(m3, 15));
         addShow(new Show(m1, 16));
         addShow(new Show(m2, 16));
+        addShow(new Show(m5, 17));
         addShow(new Show(m3, 18));
+        addShow(new Show(m2, 19));
     }
 
     void print() {

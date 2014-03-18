@@ -115,7 +115,7 @@ public class ParkingLot {
 
     void printStatusMatrix() {
         int index=0;
-        double columnCount = 200.0;
+        double columnCount = 400.0;
         double doubleColumnCount = (double) columnCount;
         int rowCount = (int) Math.ceil((size()/doubleColumnCount));
 
@@ -123,9 +123,9 @@ public class ParkingLot {
             for (int column=0; column<columnCount; column++) {
                 if (slotList[index].isOccupied) {
                     Car car = slotList[index].occupier;
-                    System.out.printf("%s ",car.getShowInitial());
+                    System.out.printf("%s",car.getShowInitial());
                 } else {
-                    System.out.printf(". ");
+                    System.out.printf(".");
                 }
                 index++;
 

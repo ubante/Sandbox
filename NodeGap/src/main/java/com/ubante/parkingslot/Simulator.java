@@ -21,7 +21,8 @@ public class Simulator {
         schedule.printCapacity();
 
         for (int hour = schedule.getStartTime(); hour<24; hour++ ) {
-            System.out.printf("The time is %d:00\n", hour);
+            System.out.printf("                         The time is %d:00\n",
+                    hour);
 
             // Find the movies that start during this hour.
 //            for (Movie m : schedule.getMoviesThatStartAt(hour)) {
@@ -30,24 +31,19 @@ public class Simulator {
 //                pl.printStatus();
 //            }
 
+            for (Show s : schedule.getShowsThatEndAt(hour)) {
+                System.out.println("----- Ending "+s.movie.name);
+                pl.unpark(s);
+                pl.printStatus();
+            }
+
             for (Show s : schedule.getShowsThatStartAt(hour)) {
                 System.out.println("+++++ Starting "+s.movie.name);
                 pl.park(s);
                 pl.printStatus();
             }
 
-            // Find the movies that ended this hour.
-//            for (Movie m : schedule.getMoviesThatEndAt(hour)) {
-//                System.out.println("----- Ending "+m.name);
-//                pl.unpark(m.viewers);
-//                pl.printStatus();
-//            }
 
-            for (Show s : schedule.getShowsThatEndAt(hour)) {
-                System.out.println("----- Ending "+s.movie.name);
-                pl.unpark(s);
-                pl.printStatus();
-            }
         }
     }
 }
