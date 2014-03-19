@@ -38,6 +38,10 @@ public class Dart {
         System.out.printf("Location: %f,%f (distance=%f)\n",x,y,distanceFromCenter);
     }
 
+    /**
+     * Test main.
+     * @param args
+     */
     public static void main(String[] args) {
         Dartboard db = new Dartboard(30);
         Dart d = new Dart(db);
