@@ -3,7 +3,7 @@ package com.ubante.bullet.model;
 /**
  * Created by Con_0 on 3/19/14.
  */
-public class Launcher {
+public class Simulator {
 
 
     static void printStats(Shooter s) {
@@ -23,10 +23,21 @@ public class Launcher {
 
     /**
      * Main main
+     * 130x HTC One
+     * http://androidspin.com/2013/10/22/watch-snapdragon-create-photo-booth-130-htc-ones-bullet-time/
+     *
+     * 50x Canon 1Dx with 24-70 f/2.8 II ($400k)
+     * https://www.youtube.com/watch?v=WDdxMBq2GW8
+     *
      * @param args
      */
     public static void main(String[] args) {
         ShooterList sl = new ShooterList("Circus Shooters");
+
+        info("Make me the mastershooter");
+        MasterShooter me = new MasterShooter("Me");
+        me.joinShooterList(sl);
+        sl.printStatus();
 
         info("Make Annie");
         Shooter annie = new Shooter("Annie");
@@ -58,11 +69,11 @@ public class Launcher {
         printStats(sl);
 
         info("Shoot bullet photo and list stats");
-        sl.shootBulletPhoto();
+        me.startBulletPhoto();
         printStats(sl);
 
         info("Here are the bullet photos");
-        sl.printBulletPhotos();
+        me.printBulletPhotos();
 
         info("Annie joins list");
         annie.joinShooterList(sl);
@@ -70,11 +81,11 @@ public class Launcher {
         printStats(sl);
 
         info("Shoot another bullet photo");
-        sl.shootBulletPhoto();
+        me.startBulletPhoto();
         printStats(sl);
 
         info("Here are the bullet photos");
-        sl.printBulletPhotos();
+        me.printBulletPhotos();
 
         info("Doggie, Elephant, Fox, Gorrilla and Hugo join");
         Shooter doggie = new Shooter("Doggie");
@@ -92,6 +103,14 @@ public class Launcher {
         info("Annie leaves");
         annie.leaveShooterList();
         sl.printStatus();
+
+        info("More bullets photos");
+        me.startBulletPhoto();
+        me.printBulletPhotos();
+        printStats(sl);
+
+        info("Bert walks away in disgust");
+
 
     }
 }

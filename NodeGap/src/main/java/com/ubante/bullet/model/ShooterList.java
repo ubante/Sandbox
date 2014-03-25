@@ -10,6 +10,7 @@ public class ShooterList {
     List<Shooter> shooters = new ArrayList<Shooter>();
     String name;
     List<Photo> bulletPhotos;
+    int countdownDuration = 5; // seconds
 
     ShooterList(String name) { this.name = name; }
 
@@ -25,8 +26,12 @@ public class ShooterList {
 
     List<Shooter> getShooters() { return shooters; }
 
+    /**
+     * Only the master shooter can initiate this.
+     */
     void shootBulletPhoto() {
         // Need the countdown here.
+
         // Do ping to make sure shooters are still available
 
         List<Photo> photoList = new ArrayList<Photo>();

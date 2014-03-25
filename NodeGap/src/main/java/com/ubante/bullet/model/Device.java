@@ -9,6 +9,7 @@ import java.util.List;
 public class Device {
     Camera camera;
     String modelName;
+    String androidId;
 
     class Camera {
         List<Photo> gallery = new ArrayList<Photo>();
@@ -30,6 +31,7 @@ public class Device {
     Device(String model) {
         modelName = model;
         camera = new Camera();
+        androidId = modelName; // later this will be the Android ID
     }
 
     Device() {
