@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Con_0 on 3/19/14.
+ * Nuke this soon.
  */
-public class Camera {
+public class DefunctCamera {
     List<Photo> gallery = new ArrayList<Photo>();
 
-    Camera() {}
+    DefunctCamera() {}
 
     void takePhoto() {
         gallery.add(new Photo());
@@ -23,7 +23,7 @@ public class Camera {
     }
 
     public static void main(String[] args) {
-        Camera c = new Camera();
+        DefunctCamera c = new DefunctCamera();
         c.print();
         c.takePhoto();
         c.takePhoto();

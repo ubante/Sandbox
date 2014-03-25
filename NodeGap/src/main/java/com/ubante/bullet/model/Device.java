@@ -1,11 +1,31 @@
 package com.ubante.bullet.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Con_0 on 3/19/14.
  */
 public class Device {
     Camera camera;
     String modelName;
+
+    class Camera {
+        List<Photo> gallery = new ArrayList<Photo>();
+
+        Camera() {}
+
+        void takePhoto() {
+            gallery.add(new Photo());
+        }
+
+        void print() {
+            System.out.printf("There are %d photos in the gallery\n",gallery.size());
+            for (Photo p : gallery) {
+                p.print();
+            }
+        }
+    }
 
     Device(String model) {
         modelName = model;
@@ -23,6 +43,12 @@ public class Device {
 
     void printGallery() {
         camera.print();
+    }
+
+    int getGallerySize() { return camera.gallery.size(); }
+
+    Photo getLastPhoto() {
+        return camera.gallery.get(getGallerySize() - 1);
     }
 
     void print() {

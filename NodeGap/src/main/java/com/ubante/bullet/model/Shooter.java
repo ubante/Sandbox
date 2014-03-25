@@ -8,12 +8,14 @@ public class Shooter {
     Device device;
     Shooter rightSide = null;
     Shooter leftSide = null;
-
-    Shooter() {}
+    ShooterList shooterList;
 
     Shooter(String name) {
         this.humanName = name;
+        this.device = new Device();
     }
+
+    Shooter() {}
 
     void setDevice(Device d) { this.device = d; }
 
@@ -37,6 +39,21 @@ public class Shooter {
 
     void setLeftSide(Shooter s) {
         leftSide = s;
+    }
+
+    void joinShooterList(ShooterList sl) {
+        shooterList = sl;
+        sl.join(this);
+    }
+
+    void leaveShooterList() {
+        shooterList.leave(this);
+    }
+
+    int getGallerySize() { return device.getGallerySize(); }
+
+    Photo getLastPhoto() {
+        return device.getLastPhoto();
     }
 
     void print() {
